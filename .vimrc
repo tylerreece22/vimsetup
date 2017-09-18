@@ -44,6 +44,7 @@
   set viminfo^=%                 " 'vi'	    use .viminfo file upon startup and exiting
   set visualbell                 " 'vb'     use visual bell instead of beeping
   set wrapscan                   " 'ws'     searches wrap around the end of the file
+  set autowriteall	             " 'awa'     as 'autowrite', but works with more commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -103,6 +104,10 @@ let mapleader = ' '
   nnoremap <leader>bn :e <c-r>=expand("%:p:h")<cr>/
 " close all the buffers
   nnoremap <leader>ba :%bd<cr>i
+"-----------
+" Tabularize 
+"-----------
+  vnoremap <leader>, :Tabularize /,<cr>
 "-------
 " splits
 "-------
