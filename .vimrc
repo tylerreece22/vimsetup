@@ -46,21 +46,14 @@
   set wrapscan                   " 'ws'     searches wrap around the end of the file
   set autowriteall	             " 'awa'     as 'autowrite', but works with more commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible                 " be iMproved, required
+filetype off                     " required
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Plugins
+"""""""""""""""
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" Enable syntax highlighting in result buffer
-  function! DBextPostResult(db_type, buf_nr)
-    if a:db_type == 'PGSQL'
-      :SQLSetType postgresql
-    endif
-  endfunction
-
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -78,25 +71,9 @@ Plugin 'Valloric/YouCompleteMe'    " Code completion
 Plugin 'airblade/vim-gitgutter'
 Plugin 'junegunn/gv.vim'
 "Plugin 'davidhalter/jedi-vim'      " Python code completion
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-"--------------------
-" syntax highlighting
-"--------------------
-  syntax enable
-  set background=dark
-  try
-    colorscheme gruvbox
-  catch
-  endtry
-" set root directory
-  let g:repoRoot = '~/vim/vimsetup/'
-" source private configuration
-  for file in split(glob(g:repoRoot . 'omit/*.vim'), '\n')
-  	    exe 'source' file
-  endfor
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader
 """""""""""""""
@@ -181,3 +158,45 @@ let mapleader = ' '
   nnoremap <leader>sN :winc h<cr>:winc \|<cr>
 "open ~/.vimrc in new tab
   nnoremap <leader>rc :tabedit ~/vim/vimsetup/.vimrc<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Functions
+"""""""""""""""
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
+" Enable syntax highlighting in result buffer
+  function! DBextPostResult(db_type, buf_nr)
+    if a:db_type == 'PGSQL'
+      :SQLSetType postgresql
+    endif
+  endfunction
+"--------------------
+" syntax highlighting
+"--------------------
+  syntax enable
+  set background=dark
+  try
+    colorscheme gruvbox
+  catch
+  endtry
+" set root directory
+  let g:repoRoot = '~/vim/vimsetup/'
+" source private configuration
+  for file in split(glob(g:repoRoot . 'omit/*.vim'), '\n')
+  	    exe 'source' file
+  endfor
