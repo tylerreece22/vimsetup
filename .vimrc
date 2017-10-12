@@ -136,7 +136,7 @@ let mapleader = ' '
   nnoremap <leader>sS :sp<cr>
   nnoremap <leader>sb :new<cr>
   nnoremap <leader>sq :q!<cr>
-  nnoremap <leader>sc :q<cr>
+  nnoremap <leader>sc :close<cr>
 " easy split sizing
   nnoremap <leader>sf :winc \|<cr>
   nnoremap <leader>se :winc =<cr>
