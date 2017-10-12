@@ -4,7 +4,7 @@
   set autoindent                 " 'ai'     take indent for new line from previous line
   set autoread                   " 'ar'     autom. read file when changed outside of Vim
   set backspace=indent,eol,start " 'bs'     how backspace works at start of line
-  set belloff=all                " 'bo'     do not ring the bell for these reasons
+ "set belloff=all                " 'bo'     do not ring the bell for these reasons
   set cmdheight=1                " 'ch'     number of lines to use for the command-line
   set copyindent                 " 'ci'     make 'autoindent' use existing indent structure
   set encoding=utf-8             " 'enc'    encoding used internally
@@ -54,6 +54,13 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+" Enable syntax highlighting in result buffer
+  function! DBextPostResult(db_type, buf_nr)
+    if a:db_type == 'PGSQL'
+      :SQLSetType postgresql
+    endif
+  endfunction
+
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -63,7 +70,13 @@ Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/tpope-vim-abolish'
-Plugin 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'         " Easy code formatting to make code look crisp
+Plugin 'vim-scripts/dbext.vim'     " Vim database integration
+Plugin 'easymotion/vim-easymotion' " Motion movement around file
+Plugin 'ctrlpvim/ctrlp.vim'        " File system searches (good for bigger projects to jump from file to file)
+Plugin 'Valloric/YouCompleteMe'    " Code completion
+"Plugin 'davidhalter/jedi-vim'      " Python code completion
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -76,6 +89,12 @@ filetype plugin indent on    " required
     colorscheme gruvbox
   catch
   endtry
+" set root directory
+  let g:repoRoot = '~/vim/vimsetup/'
+" source private configuration
+  for file in split(glob(g:repoRoot . 'omit/*.vim'), '\n')
+  	    exe 'source' file
+  endfor
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader
 """""""""""""""
@@ -86,7 +105,7 @@ let mapleader = ' '
 """""""""
   nnoremap <leader>rcc :%s/\<\u\|\l\u/\=len(submatch(0)) == 1 ? tolower(submatch(0)) : submatch(0)[0].'_'.tolower(submatch(0)[1])/gc<cr>
 "Saving and sourcing
-  nnoremap <leader><leader>s :source ~/.vimrc<cr>
+  nnoremap <leader><leader>s :source ~/vim/vimsetup/.vimrc<cr>
   nnoremap <leader>s :w<cr>
 " tabs
   nnoremap <leader>tn :tabnew<cr>
@@ -111,6 +130,8 @@ let mapleader = ' '
 "-------
 " splits
 "-------
+" database
+  nnoremap <leader>dbq :DBExecSQLUnderCursor<cr>
 " opening/closing splits
   nnoremap <leader>ss :vnew<cr>
   nnoremap <leader>sT :vsp<cr>
@@ -138,4 +159,4 @@ let mapleader = ' '
   nnoremap <leader>sn :winc l<cr>:winc \|<cr>
   nnoremap <leader>sN :winc h<cr>:winc \|<cr>
 "open ~/.vimrc in new tab
-  nnoremap <leader>rc :tabedit ~/.vimrc<cr>
+  nnoremap <leader>rc :tabedit ~/vim/vimsetup/.vimrc<cr>
