@@ -75,6 +75,8 @@ Plugin 'vim-scripts/dbext.vim'     " Vim database integration
 Plugin 'easymotion/vim-easymotion' " Motion movement around file
 Plugin 'ctrlpvim/ctrlp.vim'        " File system searches (good for bigger projects to jump from file to file)
 Plugin 'Valloric/YouCompleteMe'    " Code completion
+Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/gv.vim'
 "Plugin 'davidhalter/jedi-vim'      " Python code completion
 
 " All of your Plugins must be added before the following line
@@ -127,6 +129,25 @@ let mapleader = ' '
 " Tabularize 
 "-----------
   vnoremap <leader>, :Tabularize /,<cr>
+"-------------
+" fugitive.vim
+"-------------
+  nnoremap <silent> <leader>gg :Gstatus<cr> :winc L<cr>
+  nnoremap <silent> <leader>gd :Gdiff<cr>
+  nnoremap <silent> <leader>gw :Gblame<cr>
+  nnoremap <silent> <leader>gp :Git pull<cr>
+  nnoremap <silent> <leader>gP :Git push<cr>
+  nnoremap <silent> <leader>gr :Gread<cr>
+  nnoremap <silent> <leader>gw :Gwrite<cr>
+  nnoremap <silent> <leader>ge :Gedit<cr>
+  nnoremap <silent> <leader>ga :Git add -p %<cr>
+  nnoremap <silent> <leader>gh :help fugitive<cr>
+  nnoremap <silent> <leader>gb :Git checkout<space>
+  nnoremap <silent> <leader>gB :Git checkout -b<space>
+"-------
+" gv.vim
+"-------
+  nnoremap <silent> <leader>gl :GV<cr>
 "-------
 " splits
 "-------
