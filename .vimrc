@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Options
 """""""""
-  set autoindent                 " 'ai'     take indent for new line from previous line
+  set autoindent                 " 'ai'     take indent for new line FROM previous line
   set autoread                   " 'ar'     autom. read file when changed outside of Vim
   set backspace=indent,eol,start " 'bs'     how backspace works at start of line
  "set belloff=all                " 'bo'     do not ring the bell for these reasons
@@ -31,13 +31,13 @@
   set ruler                      " 'ru'     show cursor line and column in the status line
   set shellpipe=&>               " 'sp'     string to put output of ':make' in error file
   set shiftwidth=2               " 'sw'     number of spaces to use for (auto)indent step
-  set showmatch                  " 'sm'     briefly jump to matching bracket if insert one
+  set showmatch                  " 'sm'     briefly jump to matching bracket if INSERT one
   set showmode                   " 'smd'    message on status line to show current mode
   set smartcase                  " 'scs'    no ignore case when pattern has uppercase
   set smartindent                " 'si'	    smart autoindenting for C programs
   set smarttab                   " 'sta'    use 'shiftwidth' when inserting <Tab>
   set softtabstop=2              " 'sts'    number of spaces that <Tab> uses while editing
-  set splitbelow                 " 'sb'     new window from split is below the current one
+  set splitbelow                 " 'sb'     new window FROM split is below the current one
   set splitright                 " 'spr'    new window is put right of the current one
   set tabstop=2                  " 'ts'     number of spaces that <Tab> in file uses
   set undolevels=1000            " 'ul'     maximum number of changes that can be undone
@@ -66,7 +66,7 @@ Plugin 'tpope/tpope-vim-abolish'
 Plugin 'godlygeek/tabular'         " Easy code formatting to make code look crisp
 Plugin 'vim-scripts/dbext.vim'     " Vim database integration
 Plugin 'easymotion/vim-easymotion' " Motion movement around file
-Plugin 'ctrlpvim/ctrlp.vim'        " File system searches (good for bigger projects to jump from file to file)
+Plugin 'ctrlpvim/ctrlp.vim'        " File system searches (good for bigger projects to jump FROM file to file)
 Plugin 'Valloric/YouCompleteMe'    " Code completion
 Plugin 'airblade/vim-gitgutter'
 Plugin 'junegunn/gv.vim'
@@ -130,6 +130,7 @@ let mapleader = ' '
 "-------
 " database
   nnoremap <leader>dbq :DBExecSQLUnderCursor<cr>
+  nnoremap <leader>db :DBPromptForBufferParameters<cr>
 " opening/closing splits
   nnoremap <leader>ss :vnew<cr>
   nnoremap <leader>sT :vsp<cr>
@@ -158,10 +159,11 @@ let mapleader = ' '
   nnoremap <leader>sN :winc h<cr>:winc \|<cr>
 "open ~/.vimrc in new tab
   nnoremap <leader>rc :tabedit ~/vim/vimsetup/.vimrc<cr>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Functions
 """""""""""""""
+"Sets libraries for youcompleteme
+let g:ycm_python_binary_path = '/usr/lib/python2.7'
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
