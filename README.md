@@ -10,7 +10,7 @@
 
 **Clone repo**
 ``` sh
-git clone https://github.com/RyanFergerson/THC.gi://github.com/tylerreece22/vimsetup.git 
+git clone https://github.com/tylerreece22/vimsetup.git
 ```
 **Place inside ~/.vimrc**
 ``` sh
