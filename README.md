@@ -1,4 +1,4 @@
-Configuration
+## Configuration
 * font: FiraCode
 * colorscheme: Gruvbox
 
