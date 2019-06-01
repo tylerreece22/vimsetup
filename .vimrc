@@ -67,7 +67,6 @@ Plugin 'godlygeek/tabular'         " Easy code formatting to make code look cris
 Plugin 'vim-scripts/dbext.vim'     " Vim database integration
 Plugin 'easymotion/vim-easymotion' " Motion movement around file
 Plugin 'ctrlpvim/ctrlp.vim'        " File system searches (good for bigger projects to jump FROM file to file)
-Plugin 'Valloric/YouCompleteMe'    " Code completion
 Plugin 'airblade/vim-gitgutter'
 Plugin 'junegunn/gv.vim'
 "Plugin 'davidhalter/jedi-vim'      " Python code completion
@@ -162,8 +161,6 @@ let mapleader = ' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Functions
 """""""""""""""
-"Sets libraries for youcompleteme
-let g:ycm_python_binary_path = '/usr/lib/python2.7'
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
